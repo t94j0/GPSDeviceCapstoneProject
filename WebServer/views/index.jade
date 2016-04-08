@@ -1,5 +1,35 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  head
+    title Simple markers
+    style.
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+  body
+    if points
+      div(id="map")
+      script.
+        function initMap() {
+          var myLatLng = {lat: -25.363, lng: 131.044};
+
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: myLatLng
+          });
+
+          var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Hello World!'
+          });
+        }
+      script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGA6F2r7KY4Efh2cVNoPpBZbQsdupURlk&callback=initMap")
+    else if uuids
+      p #{ uuids }
